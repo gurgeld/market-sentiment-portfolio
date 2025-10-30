@@ -1,0 +1,9 @@
+requests
+duckdb
+pandas
+pyarrow
+python-dateutil
+tqdm
+dbt-duckdb
+streamlit
+altair
