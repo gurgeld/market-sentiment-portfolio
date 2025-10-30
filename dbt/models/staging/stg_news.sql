@@ -31,4 +31,4 @@ parsed AS (
     ingested_at
   FROM base
 )
-SELECT * FROM parsed;
+SELECT * FROM parsed

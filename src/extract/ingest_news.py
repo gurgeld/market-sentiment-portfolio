@@ -6,7 +6,7 @@ from src.utils.io import get_con, ensure_schemas
 
 # Config – ajuste tickers e tópicos do seu MVP
 TICKERS = ["AAPL", "MSFT", "GOOGL", "AMZN", "XOM", "PG"]
-TOPICS  = ["technology", "earnings", "ipo"]  # veja doc oficial p/ lista
+TOPICS  = ["technology"]  # veja doc oficial p/ lista
 # janela de coleta (últimos 7 dias)
 DAYS_BACK = int(os.getenv("NEWS_DAYS_BACK", "7"))
 
@@ -23,7 +23,7 @@ def main():
     params = {
         "function": "NEWS_SENTIMENT",
         # você pode usar 'tickers' OU 'topics' — combine com parcimônia
-        "tickers": ",".join(TICKERS),
+        #"tickers": ",".join(TICKERS),
         "topics": ",".join(TOPICS),
         "sort": "LATEST",
         "time_from": iso8601(time_from),

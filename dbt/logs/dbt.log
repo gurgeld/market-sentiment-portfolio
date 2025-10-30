@@ -1,0 +1,610 @@
+[0m17:48:21.379334 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DDB87080>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DB8A6030>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DD9D99A0>]}
+
+
+============================== 17:48:21.397902 | 64248ecb-489a-45ea-9f5c-85305a9f2eeb ==============================
+[0m17:48:21.397902 [info ] [MainThread]: Running with dbt=1.10.13
+[0m17:48:21.398903 [debug] [MainThread]: running dbt with arguments {'partial_parse': 'True', 'quiet': 'False', 'use_colors': 'True', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'static_parser': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'no_print': 'None', 'warn_error': 'None', 'version_check': 'True', 'indirect_selection': 'eager', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'target_path': 'None', 'log_path': 'dbt\\logs', 'cache_selected_only': 'False', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt run --project-dir dbt --profiles-dir dbt', 'profiles_dir': 'dbt', 'use_experimental_parser': 'False'}
+[0m17:48:21.860867 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DDF0C4D0>]}
+[0m17:48:22.008496 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DD7D69F0>]}
+[0m17:48:22.013649 [info ] [MainThread]: Registered adapter: duckdb=1.9.4
+[0m17:48:22.387860 [debug] [MainThread]: checksum: 9f0c81e2574b4ff463f3d16d080df83c6982fc0372c9feeacae0504ac9ea3ffe, vars: {}, profile: , target: , version: 1.10.13
+[0m17:48:22.390851 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m17:48:22.391848 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DF2992B0>]}
+[0m17:48:24.602906 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DDE0B3B0>]}
+[0m17:48:24.728580 [debug] [MainThread]: Wrote artifact WritableManifest to dbt\target\manifest.json
+[0m17:48:24.734042 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt\target\semantic_manifest.json
+[0m17:48:24.785370 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DF8C56D0>]}
+[0m17:48:24.786367 [info ] [MainThread]: Found 4 models, 8 data tests, 429 macros
+[0m17:48:24.787363 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DF7926F0>]}
+[0m17:48:24.790208 [info ] [MainThread]: 
+[0m17:48:24.790208 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m17:48:24.791233 [info ] [MainThread]: 
+[0m17:48:24.792229 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m17:48:24.798220 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_warehouse'
+[0m17:48:24.810188 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_warehouse'
+[0m17:48:25.206010 [debug] [ThreadPool]: Using duckdb connection "list_warehouse"
+[0m17:48:25.207009 [debug] [ThreadPool]: Using duckdb connection "list_warehouse"
+[0m17:48:25.207009 [debug] [ThreadPool]: On list_warehouse: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "list_warehouse"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"warehouse"'
+    
+  
+  
+[0m17:48:25.208006 [debug] [ThreadPool]: On list_warehouse: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "list_warehouse"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"warehouse"'
+    
+  
+  
+[0m17:48:25.209003 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:48:25.209003 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:48:25.278226 [debug] [ThreadPool]: SQL status: OK in 0.069 seconds
+[0m17:48:25.280240 [debug] [ThreadPool]: SQL status: OK in 0.071 seconds
+[0m17:48:25.282216 [debug] [ThreadPool]: On list_warehouse: Close
+[0m17:48:25.284211 [debug] [ThreadPool]: On list_warehouse: Close
+[0m17:48:25.285132 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_warehouse, now create_warehouse_main_gold)
+[0m17:48:25.287370 [debug] [ThreadPool]: Creating schema "database: "warehouse"
+schema: "main_gold"
+"
+[0m17:48:25.296348 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_warehouse, now create_warehouse_main_silver)
+[0m17:48:25.298350 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_gold"
+[0m17:48:25.299341 [debug] [ThreadPool]: Creating schema "database: "warehouse"
+schema: "main_silver"
+"
+[0m17:48:25.299341 [debug] [ThreadPool]: On create_warehouse_main_gold: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "create_warehouse_main_gold"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='warehouse'
+        and type='sqlite'
+    
+  
+[0m17:48:25.302709 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_silver"
+[0m17:48:25.303711 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m17:48:25.303711 [debug] [ThreadPool]: On create_warehouse_main_silver: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "create_warehouse_main_silver"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='warehouse'
+        and type='sqlite'
+    
+  
+[0m17:48:25.304702 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m17:48:25.305701 [debug] [ThreadPool]: SQL status: OK in 0.003 seconds
+[0m17:48:25.306697 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m17:48:25.308708 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_silver"
+[0m17:48:25.310687 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_gold"
+[0m17:48:25.311696 [debug] [ThreadPool]: On create_warehouse_main_silver: BEGIN
+[0m17:48:25.311696 [debug] [ThreadPool]: On create_warehouse_main_gold: BEGIN
+[0m17:48:25.313687 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m17:48:25.314688 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_silver"
+[0m17:48:25.315674 [debug] [ThreadPool]: On create_warehouse_main_silver: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "create_warehouse_main_silver"} */
+
+    
+    
+        create schema if not exists "warehouse"."main_silver"
+    
+[0m17:48:25.316671 [debug] [ThreadPool]: SQL status: OK in 0.004 seconds
+[0m17:48:25.317669 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_gold"
+[0m17:48:25.317669 [debug] [ThreadPool]: On create_warehouse_main_gold: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "create_warehouse_main_gold"} */
+
+    
+    
+        create schema if not exists "warehouse"."main_gold"
+    
+[0m17:48:25.318666 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m17:48:25.319672 [debug] [ThreadPool]: On create_warehouse_main_silver: COMMIT
+[0m17:48:25.320661 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_silver"
+[0m17:48:25.321658 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m17:48:25.321658 [debug] [ThreadPool]: On create_warehouse_main_silver: COMMIT
+[0m17:48:25.323653 [debug] [ThreadPool]: On create_warehouse_main_gold: COMMIT
+[0m17:48:25.324651 [debug] [ThreadPool]: Using duckdb connection "create_warehouse_main_gold"
+[0m17:48:25.324651 [debug] [ThreadPool]: On create_warehouse_main_gold: COMMIT
+[0m17:48:25.329644 [debug] [ThreadPool]: SQL status: OK in 0.006 seconds
+[0m17:48:25.330638 [debug] [ThreadPool]: On create_warehouse_main_silver: Close
+[0m17:48:25.332637 [debug] [ThreadPool]: SQL status: OK in 0.007 seconds
+[0m17:48:25.332637 [debug] [ThreadPool]: On create_warehouse_main_gold: Close
+[0m17:48:25.335641 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_warehouse_main_gold'
+[0m17:48:25.343633 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_warehouse_main_silver'
+[0m17:48:25.344629 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_gold"
+[0m17:48:25.348618 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_silver"
+[0m17:48:25.349266 [debug] [ThreadPool]: On list_warehouse_main_gold: BEGIN
+[0m17:48:25.349862 [debug] [ThreadPool]: On list_warehouse_main_silver: BEGIN
+[0m17:48:25.350415 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:48:25.350958 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:48:25.351491 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m17:48:25.352490 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_gold"
+[0m17:48:25.352490 [debug] [ThreadPool]: On list_warehouse_main_gold: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "list_warehouse_main_gold"} */
+select
+      'warehouse' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main_gold'
+    and lower(table_catalog) = 'warehouse'
+  
+[0m17:48:25.353487 [debug] [ThreadPool]: SQL status: OK in 0.003 seconds
+[0m17:48:25.354514 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_silver"
+[0m17:48:25.354514 [debug] [ThreadPool]: On list_warehouse_main_silver: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "list_warehouse_main_silver"} */
+select
+      'warehouse' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main_silver'
+    and lower(table_catalog) = 'warehouse'
+  
+[0m17:48:25.398461 [debug] [ThreadPool]: SQL status: OK in 0.044 seconds
+[0m17:48:25.399459 [debug] [ThreadPool]: SQL status: OK in 0.046 seconds
+[0m17:48:25.401454 [debug] [ThreadPool]: On list_warehouse_main_silver: ROLLBACK
+[0m17:48:25.403499 [debug] [ThreadPool]: On list_warehouse_main_gold: ROLLBACK
+[0m17:48:25.407520 [debug] [ThreadPool]: Failed to rollback 'list_warehouse_main_silver'
+[0m17:48:25.408502 [debug] [ThreadPool]: Failed to rollback 'list_warehouse_main_gold'
+[0m17:48:25.409723 [debug] [ThreadPool]: On list_warehouse_main_silver: Close
+[0m17:48:25.410237 [debug] [ThreadPool]: On list_warehouse_main_gold: Close
+[0m17:48:25.411564 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DDE8F7A0>]}
+[0m17:48:25.411564 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:48:25.412596 [debug] [MainThread]: On master: BEGIN
+[0m17:48:25.412596 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m17:48:25.413593 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m17:48:25.414588 [debug] [MainThread]: On master: COMMIT
+[0m17:48:25.414588 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:48:25.415588 [debug] [MainThread]: On master: COMMIT
+[0m17:48:25.415588 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:48:25.416586 [debug] [MainThread]: On master: Close
+[0m17:48:25.425530 [debug] [Thread-1 (]: Began running node model.market_sentiment.mart_daily_sentiment
+[0m17:48:25.426552 [debug] [Thread-2 (]: Began running node model.market_sentiment.mart_ticker_heatmap
+[0m17:48:25.427525 [debug] [Thread-3 (]: Began running node model.market_sentiment.stg_news
+[0m17:48:25.429554 [debug] [Thread-4 (]: Began running node model.market_sentiment.stg_ticker_sentiment
+[0m17:48:25.426552 [info ] [Thread-1 (]: 1 of 4 START sql table model main_gold.mart_daily_sentiment .................... [RUN]
+[0m17:48:25.428548 [info ] [Thread-2 (]: 2 of 4 START sql table model main_gold.mart_ticker_heatmap ..................... [RUN]
+[0m17:48:25.432475 [debug] [Thread-1 (]: Acquiring new duckdb connection 'model.market_sentiment.mart_daily_sentiment'
+[0m17:48:25.430679 [info ] [Thread-3 (]: 3 of 4 START sql view model main_silver.stg_news ............................... [RUN]
+[0m17:48:25.433684 [debug] [Thread-2 (]: Acquiring new duckdb connection 'model.market_sentiment.mart_ticker_heatmap'
+[0m17:48:25.434797 [debug] [Thread-1 (]: Began compiling node model.market_sentiment.mart_daily_sentiment
+[0m17:48:25.431503 [info ] [Thread-4 (]: 4 of 4 START sql view model main_silver.stg_ticker_sentiment ................... [RUN]
+[0m17:48:25.435496 [debug] [Thread-3 (]: Acquiring new duckdb connection 'model.market_sentiment.stg_news'
+[0m17:48:25.436507 [debug] [Thread-2 (]: Began compiling node model.market_sentiment.mart_ticker_heatmap
+[0m17:48:25.449488 [debug] [Thread-1 (]: Writing injected SQL for node "model.market_sentiment.mart_daily_sentiment"
+[0m17:48:25.450489 [debug] [Thread-4 (]: Acquiring new duckdb connection 'model.market_sentiment.stg_ticker_sentiment'
+[0m17:48:25.451493 [debug] [Thread-3 (]: Began compiling node model.market_sentiment.stg_news
+[0m17:48:25.453339 [debug] [Thread-2 (]: Writing injected SQL for node "model.market_sentiment.mart_ticker_heatmap"
+[0m17:48:25.454336 [debug] [Thread-4 (]: Began compiling node model.market_sentiment.stg_ticker_sentiment
+[0m17:48:25.457359 [debug] [Thread-3 (]: Writing injected SQL for node "model.market_sentiment.stg_news"
+[0m17:48:25.459357 [debug] [Thread-4 (]: Writing injected SQL for node "model.market_sentiment.stg_ticker_sentiment"
+[0m17:48:25.466402 [debug] [Thread-4 (]: Began executing node model.market_sentiment.stg_ticker_sentiment
+[0m17:48:25.488341 [debug] [Thread-2 (]: Began executing node model.market_sentiment.mart_ticker_heatmap
+[0m17:48:25.532249 [debug] [Thread-4 (]: Writing runtime sql for node "model.market_sentiment.stg_ticker_sentiment"
+[0m17:48:25.533247 [debug] [Thread-3 (]: Began executing node model.market_sentiment.stg_news
+[0m17:48:25.544216 [debug] [Thread-2 (]: Writing runtime sql for node "model.market_sentiment.mart_ticker_heatmap"
+[0m17:48:25.548180 [debug] [Thread-3 (]: Writing runtime sql for node "model.market_sentiment.stg_news"
+[0m17:48:25.549178 [debug] [Thread-1 (]: Began executing node model.market_sentiment.mart_daily_sentiment
+[0m17:48:25.554194 [debug] [Thread-1 (]: Writing runtime sql for node "model.market_sentiment.mart_daily_sentiment"
+[0m17:48:25.558886 [debug] [Thread-4 (]: Using duckdb connection "model.market_sentiment.stg_ticker_sentiment"
+[0m17:48:25.559887 [debug] [Thread-4 (]: On model.market_sentiment.stg_ticker_sentiment: BEGIN
+[0m17:48:25.560886 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m17:48:25.561882 [debug] [Thread-1 (]: Using duckdb connection "model.market_sentiment.mart_daily_sentiment"
+[0m17:48:25.562881 [debug] [Thread-1 (]: On model.market_sentiment.mart_daily_sentiment: BEGIN
+[0m17:48:25.563877 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m17:48:25.563877 [debug] [Thread-2 (]: Using duckdb connection "model.market_sentiment.mart_ticker_heatmap"
+[0m17:48:25.564905 [debug] [Thread-3 (]: Using duckdb connection "model.market_sentiment.stg_news"
+[0m17:48:25.565898 [debug] [Thread-4 (]: SQL status: OK in 0.005 seconds
+[0m17:48:25.566901 [debug] [Thread-2 (]: On model.market_sentiment.mart_ticker_heatmap: BEGIN
+[0m17:48:25.566901 [debug] [Thread-1 (]: SQL status: OK in 0.004 seconds
+[0m17:48:25.567901 [debug] [Thread-3 (]: On model.market_sentiment.stg_news: BEGIN
+[0m17:48:25.568864 [debug] [Thread-4 (]: Using duckdb connection "model.market_sentiment.stg_ticker_sentiment"
+[0m17:48:25.568864 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m17:48:25.569894 [debug] [Thread-1 (]: Using duckdb connection "model.market_sentiment.mart_daily_sentiment"
+[0m17:48:25.570857 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m17:48:25.570857 [debug] [Thread-4 (]: On model.market_sentiment.stg_ticker_sentiment: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.stg_ticker_sentiment"} */
+
+  
+  create view "warehouse"."main_silver"."stg_ticker_sentiment__dbt_tmp" as (
+    SELECT
+  ts.news_id,
+  UPPER(ts.ticker) AS ticker,
+  CAST(ts.relevance_score AS DOUBLE) AS relevance_score,
+  CAST(ts.ticker_sentiment_score AS DOUBLE) AS ticker_sentiment_score,
+  ts.ticker_sentiment_label
+FROM bronze.bronze_ticker_sentiment ts
+JOIN silver.stg_news n ON n.id = ts.news_id;
+  );
+
+[0m17:48:25.571856 [debug] [Thread-1 (]: On model.market_sentiment.mart_daily_sentiment: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.mart_daily_sentiment"} */
+
+  
+    
+    
+
+    create  table
+      "warehouse"."main_gold"."mart_daily_sentiment__dbt_tmp"
+  
+    as (
+      WITH per_article AS (
+  SELECT
+    s.ticker,
+    n.published_date,
+    -- peso por relevância do ticker no artigo
+    s.ticker_sentiment_score * s.relevance_score AS weighted_score
+  FROM silver.stg_ticker_sentiment s
+  JOIN silver.stg_news n ON n.id = s.news_id
+),
+agg AS (
+  SELECT
+    ticker,
+    published_date,
+    COUNT(*) AS article_count,
+    AVG(weighted_score) AS avg_weighted_score,
+    AVG(CASE WHEN weighted_score > 0 THEN weighted_score END) AS avg_pos_score,
+    AVG(CASE WHEN weighted_score < 0 THEN weighted_score END) AS avg_neg_score,
+    SUM(CASE WHEN weighted_score > 0 THEN 1 ELSE 0 END)::INT AS pos_articles,
+    SUM(CASE WHEN weighted_score < 0 THEN 1 ELSE 0 END)::INT AS neg_articles
+  FROM per_article
+  GROUP BY 1,2
+),
+indexing AS (
+  SELECT
+    *,
+    -- índice 0–100 simples p/ visual
+    50 + 50 * COALESCE(avg_weighted_score, 0) AS sentiment_index_100
+  FROM agg
+)
+SELECT * FROM indexing;
+    );
+  
+  
+[0m17:48:25.572882 [debug] [Thread-2 (]: SQL status: OK in 0.004 seconds
+[0m17:48:25.583150 [debug] [Thread-4 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.stg_ticker_sentiment"} */
+
+  
+  create view "warehouse"."main_silver"."stg_ticker_sentiment__dbt_tmp" as (
+    SELECT
+  ts.news_id,
+  UPPER(ts.ticker) AS ticker,
+  CAST(ts.relevance_score AS DOUBLE) AS relevance_score,
+  CAST(ts.ticker_sentiment_score AS DOUBLE) AS ticker_sentiment_score,
+  ts.ticker_sentiment_label
+FROM bronze.bronze_ticker_sentiment ts
+JOIN silver.stg_news n ON n.id = ts.news_id;
+  );
+
+[0m17:48:25.584148 [debug] [Thread-2 (]: Using duckdb connection "model.market_sentiment.mart_ticker_heatmap"
+[0m17:48:25.585155 [debug] [Thread-3 (]: SQL status: OK in 0.014 seconds
+[0m17:48:25.587874 [debug] [Thread-1 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.mart_daily_sentiment"} */
+
+  
+    
+    
+
+    create  table
+      "warehouse"."main_gold"."mart_daily_sentiment__dbt_tmp"
+  
+    as (
+      WITH per_article AS (
+  SELECT
+    s.ticker,
+    n.published_date,
+    -- peso por relevância do ticker no artigo
+    s.ticker_sentiment_score * s.relevance_score AS weighted_score
+  FROM silver.stg_ticker_sentiment s
+  JOIN silver.stg_news n ON n.id = s.news_id
+),
+agg AS (
+  SELECT
+    ticker,
+    published_date,
+    COUNT(*) AS article_count,
+    AVG(weighted_score) AS avg_weighted_score,
+    AVG(CASE WHEN weighted_score > 0 THEN weighted_score END) AS avg_pos_score,
+    AVG(CASE WHEN weighted_score < 0 THEN weighted_score END) AS avg_neg_score,
+    SUM(CASE WHEN weighted_score > 0 THEN 1 ELSE 0 END)::INT AS pos_articles,
+    SUM(CASE WHEN weighted_score < 0 THEN 1 ELSE 0 END)::INT AS neg_articles
+  FROM per_article
+  GROUP BY 1,2
+),
+indexing AS (
+  SELECT
+    *,
+    -- índice 0–100 simples p/ visual
+    50 + 50 * COALESCE(avg_weighted_score, 0) AS sentiment_index_100
+  FROM agg
+)
+SELECT * FROM indexing;
+    );
+  
+  
+[0m17:48:25.589146 [debug] [Thread-4 (]: DuckDB adapter: Rolling back transaction.
+[0m17:48:25.589911 [debug] [Thread-2 (]: On model.market_sentiment.mart_ticker_heatmap: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.mart_ticker_heatmap"} */
+
+  
+    
+    
+
+    create  table
+      "warehouse"."main_gold"."mart_ticker_heatmap__dbt_tmp"
+  
+    as (
+      WITH latest AS (
+  SELECT
+    ticker,
+    MAX(published_date) AS last_date
+  FROM gold.mart_daily_sentiment
+  GROUP BY 1
+)
+SELECT
+  d.ticker,
+  d.published_date,
+  d.article_count,
+  d.avg_weighted_score,
+  d.sentiment_index_100
+FROM gold.mart_daily_sentiment d
+JOIN latest l
+  ON d.ticker = l.ticker
+WHERE d.published_date >= l.last_date - INTERVAL 30 DAY;
+    );
+  
+  
+[0m17:48:25.590646 [debug] [Thread-3 (]: Using duckdb connection "model.market_sentiment.stg_news"
+[0m17:48:25.591313 [debug] [Thread-1 (]: DuckDB adapter: Rolling back transaction.
+[0m17:48:25.592340 [debug] [Thread-4 (]: On model.market_sentiment.stg_ticker_sentiment: ROLLBACK
+[0m17:48:25.592340 [debug] [Thread-3 (]: On model.market_sentiment.stg_news: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.stg_news"} */
+
+  
+  create view "warehouse"."main_silver"."stg_news__dbt_tmp" as (
+    WITH base AS (
+  SELECT
+    id,
+    title,
+    summary,
+    source,
+    url,
+    time_published,
+    CAST(overall_sentiment_score AS DOUBLE) AS overall_sentiment_score,
+    overall_sentiment_label,
+    topics,
+    ingested_at
+  FROM bronze.bronze_news
+),
+parsed AS (
+  SELECT
+    id,
+    title,
+    summary,
+    source,
+    url,
+    -- "20250122T153200" → timestamp
+    CAST(
+      STRPTIME(time_published, '%Y%m%dT%H%M%S')
+      AS TIMESTAMP
+    ) AT TIME ZONE 'UTC' AS published_ts_utc,
+    DATE_TRUNC('day', CAST(STRPTIME(time_published, '%Y%m%dT%H%M%S') AS TIMESTAMP)) AS published_date,
+    overall_sentiment_score,
+    overall_sentiment_label,
+    topics,
+    ingested_at
+  FROM base
+)
+SELECT * FROM parsed;
+  );
+
+[0m17:48:25.593336 [debug] [Thread-1 (]: On model.market_sentiment.mart_daily_sentiment: ROLLBACK
+[0m17:48:25.594307 [debug] [Thread-2 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.mart_ticker_heatmap"} */
+
+  
+    
+    
+
+    create  table
+      "warehouse"."main_gold"."mart_ticker_heatmap__dbt_tmp"
+  
+    as (
+      WITH latest AS (
+  SELECT
+    ticker,
+    MAX(published_date) AS last_date
+  FROM gold.mart_daily_sentiment
+  GROUP BY 1
+)
+SELECT
+  d.ticker,
+  d.published_date,
+  d.article_count,
+  d.avg_weighted_score,
+  d.sentiment_index_100
+FROM gold.mart_daily_sentiment d
+JOIN latest l
+  ON d.ticker = l.ticker
+WHERE d.published_date >= l.last_date - INTERVAL 30 DAY;
+    );
+  
+  
+[0m17:48:25.595334 [debug] [Thread-3 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "model.market_sentiment.stg_news"} */
+
+  
+  create view "warehouse"."main_silver"."stg_news__dbt_tmp" as (
+    WITH base AS (
+  SELECT
+    id,
+    title,
+    summary,
+    source,
+    url,
+    time_published,
+    CAST(overall_sentiment_score AS DOUBLE) AS overall_sentiment_score,
+    overall_sentiment_label,
+    topics,
+    ingested_at
+  FROM bronze.bronze_news
+),
+parsed AS (
+  SELECT
+    id,
+    title,
+    summary,
+    source,
+    url,
+    -- "20250122T153200" → timestamp
+    CAST(
+      STRPTIME(time_published, '%Y%m%dT%H%M%S')
+      AS TIMESTAMP
+    ) AT TIME ZONE 'UTC' AS published_ts_utc,
+    DATE_TRUNC('day', CAST(STRPTIME(time_published, '%Y%m%dT%H%M%S') AS TIMESTAMP)) AS published_date,
+    overall_sentiment_score,
+    overall_sentiment_label,
+    topics,
+    ingested_at
+  FROM base
+)
+SELECT * FROM parsed;
+  );
+
+[0m17:48:25.600290 [debug] [Thread-2 (]: DuckDB adapter: Rolling back transaction.
+[0m17:48:25.601288 [debug] [Thread-3 (]: DuckDB adapter: Rolling back transaction.
+[0m17:48:25.602286 [debug] [Thread-2 (]: On model.market_sentiment.mart_ticker_heatmap: ROLLBACK
+[0m17:48:25.603285 [debug] [Thread-3 (]: On model.market_sentiment.stg_news: ROLLBACK
+[0m17:48:25.628993 [debug] [Thread-4 (]: Failed to rollback 'model.market_sentiment.stg_ticker_sentiment'
+[0m17:48:25.631019 [debug] [Thread-3 (]: Failed to rollback 'model.market_sentiment.stg_news'
+[0m17:48:25.632021 [debug] [Thread-4 (]: On model.market_sentiment.stg_ticker_sentiment: Close
+[0m17:48:25.632983 [debug] [Thread-3 (]: On model.market_sentiment.stg_news: Close
+[0m17:48:25.634976 [debug] [Thread-1 (]: Failed to rollback 'model.market_sentiment.mart_daily_sentiment'
+[0m17:48:25.636748 [debug] [Thread-2 (]: Failed to rollback 'model.market_sentiment.mart_ticker_heatmap'
+[0m17:48:25.639653 [debug] [Thread-1 (]: On model.market_sentiment.mart_daily_sentiment: Close
+[0m17:48:25.639653 [debug] [Thread-2 (]: On model.market_sentiment.mart_ticker_heatmap: Close
+[0m17:48:25.645601 [debug] [Thread-4 (]: Runtime Error in model stg_ticker_sentiment (models\staging\stg_ticker_sentiment.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 12: JOIN silver.stg_news n ON n.id = ts.news_id;
+                                                      ^
+[0m17:48:25.650621 [debug] [Thread-3 (]: Runtime Error in model stg_news (models\staging\stg_news.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 38: SELECT * FROM parsed;
+                             ^
+[0m17:48:25.652617 [debug] [Thread-1 (]: Runtime Error in model mart_daily_sentiment (models\marts\mart_daily_sentiment.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 40: SELECT * FROM indexing;
+                             ^
+[0m17:48:25.654609 [debug] [Thread-2 (]: Runtime Error in model mart_ticker_heatmap (models\marts\mart_ticker_heatmap.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 27: WHERE d.published_date >= l.last_date - INTERVAL 30 DAY;
+                                                                  ^
+[0m17:48:25.656571 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DFC42180>]}
+[0m17:48:25.657731 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DFD3A7E0>]}
+[0m17:48:25.657731 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DF642060>]}
+[0m17:48:25.656571 [error] [Thread-4 (]: 4 of 4 ERROR creating sql view model main_silver.stg_ticker_sentiment .......... [[31mERROR[0m in 0.20s]
+[0m17:48:25.660127 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '64248ecb-489a-45ea-9f5c-85305a9f2eeb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DF298410>]}
+[0m17:48:25.658758 [error] [Thread-3 (]: 3 of 4 ERROR creating sql view model main_silver.stg_news ...................... [[31mERROR[0m in 0.22s]
+[0m17:48:25.661674 [debug] [Thread-4 (]: Finished running node model.market_sentiment.stg_ticker_sentiment
+[0m17:48:25.660674 [error] [Thread-1 (]: 1 of 4 ERROR creating sql table model main_gold.mart_daily_sentiment ........... [[31mERROR[0m in 0.22s]
+[0m17:48:25.665535 [debug] [Thread-3 (]: Finished running node model.market_sentiment.stg_news
+[0m17:48:25.663505 [error] [Thread-2 (]: 2 of 4 ERROR creating sql table model main_gold.mart_ticker_heatmap ............ [[31mERROR[0m in 0.22s]
+[0m17:48:25.667090 [debug] [Thread-1 (]: Finished running node model.market_sentiment.mart_daily_sentiment
+[0m17:48:25.667090 [debug] [Thread-7 (]: Marking all children of 'model.market_sentiment.stg_ticker_sentiment' to be skipped because of status 'error'.  Reason: Runtime Error in model stg_ticker_sentiment (models\staging\stg_ticker_sentiment.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 12: JOIN silver.stg_news n ON n.id = ts.news_id;
+                                                      ^.
+[0m17:48:25.668089 [debug] [Thread-2 (]: Finished running node model.market_sentiment.mart_ticker_heatmap
+[0m17:48:25.670083 [debug] [Thread-7 (]: Marking all children of 'model.market_sentiment.stg_news' to be skipped because of status 'error'.  Reason: Runtime Error in model stg_news (models\staging\stg_news.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 38: SELECT * FROM parsed;
+                             ^.
+[0m17:48:25.671081 [debug] [Thread-7 (]: Marking all children of 'model.market_sentiment.mart_daily_sentiment' to be skipped because of status 'error'.  Reason: Runtime Error in model mart_daily_sentiment (models\marts\mart_daily_sentiment.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 40: SELECT * FROM indexing;
+                             ^.
+[0m17:48:25.672082 [debug] [Thread-7 (]: Marking all children of 'model.market_sentiment.mart_ticker_heatmap' to be skipped because of status 'error'.  Reason: Runtime Error in model mart_ticker_heatmap (models\marts\mart_ticker_heatmap.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 27: WHERE d.published_date >= l.last_date - INTERVAL 30 DAY;
+                                                                  ^.
+[0m17:48:25.674041 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:48:25.675038 [debug] [MainThread]: On master: BEGIN
+[0m17:48:25.675038 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m17:48:25.676035 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m17:48:25.676035 [debug] [MainThread]: On master: COMMIT
+[0m17:48:25.677032 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:48:25.677032 [debug] [MainThread]: On master: COMMIT
+[0m17:48:25.678030 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:48:25.679027 [debug] [MainThread]: On master: Close
+[0m17:48:25.679027 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m17:48:25.680025 [debug] [MainThread]: Connection 'create_warehouse_main_silver' was properly closed.
+[0m17:48:25.680025 [debug] [MainThread]: Connection 'create_warehouse_main_gold' was properly closed.
+[0m17:48:25.680025 [debug] [MainThread]: Connection 'list_warehouse_main_gold' was properly closed.
+[0m17:48:25.681022 [debug] [MainThread]: Connection 'list_warehouse_main_silver' was properly closed.
+[0m17:48:25.681022 [debug] [MainThread]: Connection 'model.market_sentiment.mart_daily_sentiment' was properly closed.
+[0m17:48:25.682019 [debug] [MainThread]: Connection 'model.market_sentiment.mart_ticker_heatmap' was properly closed.
+[0m17:48:25.682019 [debug] [MainThread]: Connection 'model.market_sentiment.stg_news' was properly closed.
+[0m17:48:25.683017 [debug] [MainThread]: Connection 'model.market_sentiment.stg_ticker_sentiment' was properly closed.
+[0m17:48:25.683017 [info ] [MainThread]: 
+[0m17:48:25.684185 [info ] [MainThread]: Finished running 2 table models, 2 view models in 0 hours 0 minutes and 0.89 seconds (0.89s).
+[0m17:48:25.686215 [debug] [MainThread]: Command end result
+[0m17:48:25.723104 [debug] [MainThread]: Wrote artifact WritableManifest to dbt\target\manifest.json
+[0m17:48:25.728072 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt\target\semantic_manifest.json
+[0m17:48:25.743032 [debug] [MainThread]: Wrote artifact RunExecutionResult to dbt\target\run_results.json
+[0m17:48:25.744029 [info ] [MainThread]: 
+[0m17:48:25.745029 [info ] [MainThread]: [31mCompleted with 4 errors, 0 partial successes, and 0 warnings:[0m
+[0m17:48:25.750013 [info ] [MainThread]: 
+[0m17:48:25.752008 [error] [MainThread]: [31mFailure in model stg_ticker_sentiment (models\staging\stg_ticker_sentiment.sql)[0m
+[0m17:48:25.754002 [error] [MainThread]:   Runtime Error in model stg_ticker_sentiment (models\staging\stg_ticker_sentiment.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 12: JOIN silver.stg_news n ON n.id = ts.news_id;
+                                                      ^
+[0m17:48:25.755000 [info ] [MainThread]: 
+[0m17:48:25.756028 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\stg_ticker_sentiment.sql
+[0m17:48:25.757993 [info ] [MainThread]: 
+[0m17:48:25.758987 [error] [MainThread]: [31mFailure in model stg_news (models\staging\stg_news.sql)[0m
+[0m17:48:25.760020 [error] [MainThread]:   Runtime Error in model stg_news (models\staging\stg_news.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 38: SELECT * FROM parsed;
+                             ^
+[0m17:48:25.761978 [info ] [MainThread]: 
+[0m17:48:25.763975 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\stg_news.sql
+[0m17:48:25.765973 [info ] [MainThread]: 
+[0m17:48:25.766969 [error] [MainThread]: [31mFailure in model mart_daily_sentiment (models\marts\mart_daily_sentiment.sql)[0m
+[0m17:48:25.768965 [error] [MainThread]:   Runtime Error in model mart_daily_sentiment (models\marts\mart_daily_sentiment.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 40: SELECT * FROM indexing;
+                             ^
+[0m17:48:25.773986 [info ] [MainThread]: 
+[0m17:48:25.775942 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\marts\mart_daily_sentiment.sql
+[0m17:48:25.777938 [info ] [MainThread]: 
+[0m17:48:25.778942 [error] [MainThread]: [31mFailure in model mart_ticker_heatmap (models\marts\mart_ticker_heatmap.sql)[0m
+[0m17:48:25.781927 [error] [MainThread]:   Runtime Error in model mart_ticker_heatmap (models\marts\mart_ticker_heatmap.sql)
+  Parser Error: syntax error at or near ";"
+  
+  LINE 27: WHERE d.published_date >= l.last_date - INTERVAL 30 DAY;
+                                                                  ^
+[0m17:48:25.783920 [info ] [MainThread]: 
+[0m17:48:25.784919 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\marts\mart_ticker_heatmap.sql
+[0m17:48:25.787920 [info ] [MainThread]: 
+[0m17:48:25.789924 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=4 SKIP=0 NO-OP=0 TOTAL=4
+[0m17:48:25.792929 [debug] [MainThread]: Command `dbt run` failed at 17:48:25.791916 after 4.67 seconds
+[0m17:48:25.793926 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DD9D99A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DD765100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B2DD764620>]}
+[0m17:48:25.794920 [debug] [MainThread]: Flushing usage events
+[0m17:48:26.685573 [debug] [MainThread]: An error was encountered while trying to flush usage events

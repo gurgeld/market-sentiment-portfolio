@@ -27,4 +27,4 @@ indexing AS (
     50 + 50 * COALESCE(avg_weighted_score, 0) AS sentiment_index_100
   FROM agg
 )
-SELECT * FROM indexing;
+SELECT * FROM indexing

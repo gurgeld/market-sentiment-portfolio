@@ -14,4 +14,4 @@ SELECT
 FROM gold.mart_daily_sentiment d
 JOIN latest l
   ON d.ticker = l.ticker
-WHERE d.published_date >= l.last_date - INTERVAL 30 DAY;
+WHERE d.published_date >= l.last_date - INTERVAL 30 DAY
