@@ -616,3 +616,834 @@ SELECT * FROM parsed;
 [0m17:48:30.541770 [debug] [MainThread]: running dbt with arguments {'partial_parse': 'True', 'quiet': 'False', 'use_colors': 'True', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'no_print': 'None', 'printer_width': '80', 'log_cache_events': 'False', 'introspect': 'True', 'empty': 'None', 'static_parser': 'True', 'version_check': 'True', 'indirect_selection': 'eager', 'warn_error': 'None', 'debug': 'False', 'log_format': 'default', 'target_path': 'None', 'log_path': 'dbt\\logs', 'cache_selected_only': 'False', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt test --project-dir dbt --profiles-dir dbt', 'profiles_dir': 'dbt', 'use_experimental_parser': 'False'}
 [0m17:48:30.971321 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '0ef8fe7f-eb27-45e0-92f6-d6b5c10bf40b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D0BD3DA0>]}
 [0m17:48:31.113913 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '0ef8fe7f-eb27-45e0-92f6-d6b5c10bf40b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D05F53A0>]}
+[0m17:48:31.117982 [info ] [MainThread]: Registered adapter: duckdb=1.9.4
+[0m17:52:03.910018 [debug] [MainThread]: checksum: 9f0c81e2574b4ff463f3d16d080df83c6982fc0372c9feeacae0504ac9ea3ffe, vars: {}, profile: , target: , version: 1.10.13
+[0m17:52:04.194683 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 4 files changed.
+[0m17:52:04.195680 [debug] [MainThread]: Partial parsing: updated file: market_sentiment://models\marts\mart_daily_sentiment.sql
+[0m17:52:04.195680 [debug] [MainThread]: Partial parsing: updated file: market_sentiment://models\staging\stg_ticker_sentiment.sql
+[0m17:52:04.196678 [debug] [MainThread]: Partial parsing: updated file: market_sentiment://models\marts\mart_ticker_heatmap.sql
+[0m17:52:04.197676 [debug] [MainThread]: Partial parsing: updated file: market_sentiment://models\staging\stg_news.sql
+[0m17:52:05.080288 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '0ef8fe7f-eb27-45e0-92f6-d6b5c10bf40b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D24DE7B0>]}
+[0m17:52:05.210938 [debug] [MainThread]: Wrote artifact WritableManifest to dbt\target\manifest.json
+[0m17:52:05.216922 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt\target\semantic_manifest.json
+[0m17:52:05.533023 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '0ef8fe7f-eb27-45e0-92f6-d6b5c10bf40b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D249C080>]}
+[0m17:52:05.534020 [info ] [MainThread]: Found 4 models, 8 data tests, 429 macros
+[0m17:52:05.535031 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '0ef8fe7f-eb27-45e0-92f6-d6b5c10bf40b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D26060F0>]}
+[0m17:52:05.539006 [info ] [MainThread]: 
+[0m17:52:05.540003 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m17:52:05.540999 [info ] [MainThread]: 
+[0m17:52:05.543993 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m17:52:05.555960 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_warehouse_main_silver'
+[0m17:52:05.566962 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_warehouse_main_gold'
+[0m17:52:05.860081 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_silver"
+[0m17:52:05.861084 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_gold"
+[0m17:52:05.862048 [debug] [ThreadPool]: On list_warehouse_main_silver: BEGIN
+[0m17:52:05.862048 [debug] [ThreadPool]: On list_warehouse_main_gold: BEGIN
+[0m17:52:05.863047 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:52:05.864043 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:52:05.894863 [debug] [ThreadPool]: SQL status: OK in 0.032 seconds
+[0m17:52:05.894863 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_silver"
+[0m17:52:05.895856 [debug] [ThreadPool]: SQL status: OK in 0.032 seconds
+[0m17:52:05.896854 [debug] [ThreadPool]: On list_warehouse_main_silver: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "list_warehouse_main_silver"} */
+select
+      'warehouse' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main_silver'
+    and lower(table_catalog) = 'warehouse'
+  
+[0m17:52:05.897885 [debug] [ThreadPool]: Using duckdb connection "list_warehouse_main_gold"
+[0m17:52:05.898849 [debug] [ThreadPool]: On list_warehouse_main_gold: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "connection_name": "list_warehouse_main_gold"} */
+select
+      'warehouse' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main_gold'
+    and lower(table_catalog) = 'warehouse'
+  
+[0m17:52:05.920789 [debug] [ThreadPool]: SQL status: OK in 0.022 seconds
+[0m17:52:05.923806 [debug] [ThreadPool]: On list_warehouse_main_silver: ROLLBACK
+[0m17:52:05.923806 [debug] [ThreadPool]: SQL status: OK in 0.024 seconds
+[0m17:52:05.925777 [debug] [ThreadPool]: On list_warehouse_main_gold: ROLLBACK
+[0m17:52:05.927771 [debug] [ThreadPool]: Failed to rollback 'list_warehouse_main_silver'
+[0m17:52:05.928793 [debug] [ThreadPool]: On list_warehouse_main_silver: Close
+[0m17:52:05.932760 [debug] [ThreadPool]: Failed to rollback 'list_warehouse_main_gold'
+[0m17:52:05.932760 [debug] [ThreadPool]: On list_warehouse_main_gold: Close
+[0m17:52:05.934752 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '0ef8fe7f-eb27-45e0-92f6-d6b5c10bf40b', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201CDDA8410>]}
+[0m17:52:05.934752 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:52:05.935776 [debug] [MainThread]: On master: BEGIN
+[0m17:52:05.935776 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m17:52:05.937744 [debug] [MainThread]: SQL status: OK in 0.001 seconds
+[0m17:52:05.938777 [debug] [MainThread]: On master: COMMIT
+[0m17:52:05.938777 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:52:05.939765 [debug] [MainThread]: On master: COMMIT
+[0m17:52:05.940735 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:52:05.940735 [debug] [MainThread]: On master: Close
+[0m17:52:05.948398 [debug] [Thread-1 (]: Began running node test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c
+[0m17:52:05.948398 [debug] [Thread-2 (]: Began running node test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3
+[0m17:52:05.950397 [debug] [Thread-3 (]: Began running node test.market_sentiment.not_null_stg_news_id.803a23d632
+[0m17:52:05.952389 [debug] [Thread-4 (]: Began running node test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e
+[0m17:52:05.949430 [info ] [Thread-1 (]: 1 of 8 START test not_null_mart_daily_sentiment_published_date ................. [RUN]
+[0m17:52:05.951404 [info ] [Thread-2 (]: 2 of 8 START test not_null_mart_daily_sentiment_ticker ......................... [RUN]
+[0m17:52:05.957376 [debug] [Thread-1 (]: Acquiring new duckdb connection 'test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c'
+[0m17:52:05.958016 [debug] [Thread-2 (]: Acquiring new duckdb connection 'test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3'
+[0m17:52:05.953392 [info ] [Thread-3 (]: 3 of 8 START test not_null_stg_news_id ......................................... [RUN]
+[0m17:52:05.959041 [debug] [Thread-1 (]: Began compiling node test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c
+[0m17:52:05.959901 [debug] [Thread-2 (]: Began compiling node test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3
+[0m17:52:05.955382 [info ] [Thread-4 (]: 4 of 8 START test not_null_stg_news_overall_sentiment_score .................... [RUN]
+[0m17:52:05.960738 [debug] [Thread-3 (]: Acquiring new duckdb connection 'test.market_sentiment.not_null_stg_news_id.803a23d632'
+[0m17:52:05.988667 [debug] [Thread-1 (]: Writing injected SQL for node "test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c"
+[0m17:52:05.993653 [debug] [Thread-2 (]: Writing injected SQL for node "test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3"
+[0m17:52:05.995286 [debug] [Thread-4 (]: Acquiring new duckdb connection 'test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e'
+[0m17:52:05.996289 [debug] [Thread-3 (]: Began compiling node test.market_sentiment.not_null_stg_news_id.803a23d632
+[0m17:52:05.997287 [debug] [Thread-4 (]: Began compiling node test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e
+[0m17:52:06.005294 [debug] [Thread-3 (]: Writing injected SQL for node "test.market_sentiment.not_null_stg_news_id.803a23d632"
+[0m17:52:06.010249 [debug] [Thread-4 (]: Writing injected SQL for node "test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e"
+[0m17:52:06.012244 [debug] [Thread-2 (]: Began executing node test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3
+[0m17:52:06.014239 [debug] [Thread-1 (]: Began executing node test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c
+[0m17:52:06.048182 [debug] [Thread-1 (]: Writing runtime sql for node "test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c"
+[0m17:52:06.051167 [debug] [Thread-2 (]: Writing runtime sql for node "test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3"
+[0m17:52:06.052136 [debug] [Thread-4 (]: Began executing node test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e
+[0m17:52:06.056125 [debug] [Thread-4 (]: Writing runtime sql for node "test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e"
+[0m17:52:06.058122 [debug] [Thread-3 (]: Began executing node test.market_sentiment.not_null_stg_news_id.803a23d632
+[0m17:52:06.061145 [debug] [Thread-3 (]: Writing runtime sql for node "test.market_sentiment.not_null_stg_news_id.803a23d632"
+[0m17:52:06.063107 [debug] [Thread-1 (]: Using duckdb connection "test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c"
+[0m17:52:06.064107 [debug] [Thread-1 (]: On test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c: BEGIN
+[0m17:52:06.066101 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m17:52:06.067117 [debug] [Thread-2 (]: Using duckdb connection "test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3"
+[0m17:52:06.068095 [debug] [Thread-2 (]: On test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3: BEGIN
+[0m17:52:06.069092 [debug] [Thread-1 (]: SQL status: OK in 0.004 seconds
+[0m17:52:06.070091 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m17:52:06.071096 [debug] [Thread-4 (]: Using duckdb connection "test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e"
+[0m17:52:06.071096 [debug] [Thread-3 (]: Using duckdb connection "test.market_sentiment.not_null_stg_news_id.803a23d632"
+[0m17:52:06.072116 [debug] [Thread-1 (]: Using duckdb connection "test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c"
+[0m17:52:06.074081 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e: BEGIN
+[0m17:52:06.075081 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_id.803a23d632: BEGIN
+[0m17:52:06.075081 [debug] [Thread-2 (]: SQL status: OK in 0.005 seconds
+[0m17:52:06.076106 [debug] [Thread-1 (]: On test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select published_date
+from "warehouse"."main_gold"."mart_daily_sentiment"
+where published_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.077070 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m17:52:06.077070 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m17:52:06.078099 [debug] [Thread-2 (]: Using duckdb connection "test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3"
+[0m17:52:06.080064 [debug] [Thread-2 (]: On test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select ticker
+from "warehouse"."main_gold"."mart_daily_sentiment"
+where ticker is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.082077 [debug] [Thread-4 (]: SQL status: OK in 0.005 seconds
+[0m17:52:06.083054 [debug] [Thread-4 (]: Using duckdb connection "test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e"
+[0m17:52:06.083054 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select overall_sentiment_score
+from "warehouse"."main_silver"."stg_news"
+where overall_sentiment_score is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.084051 [debug] [Thread-3 (]: SQL status: OK in 0.007 seconds
+[0m17:52:06.085050 [debug] [Thread-3 (]: Using duckdb connection "test.market_sentiment.not_null_stg_news_id.803a23d632"
+[0m17:52:06.086072 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_id.803a23d632: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_news_id.803a23d632"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select id
+from "warehouse"."main_silver"."stg_news"
+where id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.091187 [debug] [Thread-2 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select ticker
+from "warehouse"."main_gold"."mart_daily_sentiment"
+where ticker is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.092186 [debug] [Thread-2 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.092186 [debug] [Thread-1 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select published_date
+from "warehouse"."main_gold"."mart_daily_sentiment"
+where published_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.093203 [debug] [Thread-3 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_news_id.803a23d632"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select id
+from "warehouse"."main_silver"."stg_news"
+where id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.094181 [debug] [Thread-2 (]: On test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3: ROLLBACK
+[0m17:52:06.094181 [debug] [Thread-4 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select overall_sentiment_score
+from "warehouse"."main_silver"."stg_news"
+where overall_sentiment_score is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.095203 [debug] [Thread-1 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.096175 [debug] [Thread-3 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.097173 [debug] [Thread-4 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.098171 [debug] [Thread-1 (]: On test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c: ROLLBACK
+[0m17:52:06.100164 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_id.803a23d632: ROLLBACK
+[0m17:52:06.101194 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e: ROLLBACK
+[0m17:52:06.126122 [debug] [Thread-3 (]: Failed to rollback 'test.market_sentiment.not_null_stg_news_id.803a23d632'
+[0m17:52:06.127097 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_id.803a23d632: Close
+[0m17:52:06.131107 [debug] [Thread-4 (]: Failed to rollback 'test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e'
+[0m17:52:06.135073 [debug] [Thread-1 (]: Failed to rollback 'test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c'
+[0m17:52:06.136094 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e: Close
+[0m17:52:06.141087 [debug] [Thread-2 (]: Failed to rollback 'test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3'
+[0m17:52:06.142132 [debug] [Thread-1 (]: On test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c: Close
+[0m17:52:06.143050 [debug] [Thread-2 (]: On test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3: Close
+[0m17:52:06.151501 [debug] [Thread-3 (]: Runtime Error in test not_null_stg_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.152498 [error] [Thread-3 (]: 3 of 8 ERROR not_null_stg_news_id .............................................. [[31mERROR[0m in 0.19s]
+[0m17:52:06.156235 [debug] [Thread-4 (]: Runtime Error in test not_null_stg_news_overall_sentiment_score (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.158202 [debug] [Thread-3 (]: Finished running node test.market_sentiment.not_null_stg_news_id.803a23d632
+[0m17:52:06.162193 [debug] [Thread-1 (]: Runtime Error in test not_null_mart_daily_sentiment_published_date (models\marts\schema.yml)
+  Catalog Error: Table with name mart_daily_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_gold"."mart_daily_sentiment"
+                ^
+[0m17:52:06.159213 [error] [Thread-4 (]: 4 of 8 ERROR not_null_stg_news_overall_sentiment_score ......................... [[31mERROR[0m in 0.16s]
+[0m17:52:06.163191 [debug] [Thread-3 (]: Began running node test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58
+[0m17:52:06.165214 [debug] [Thread-2 (]: Runtime Error in test not_null_mart_daily_sentiment_ticker (models\marts\schema.yml)
+  Catalog Error: Table with name mart_daily_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_gold"."mart_daily_sentiment"
+                ^
+[0m17:52:06.166212 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.not_null_stg_news_id.803a23d632' to be skipped because of status 'error'.  Reason: Runtime Error in test not_null_stg_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^.
+[0m17:52:06.168218 [debug] [Thread-4 (]: Finished running node test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e
+[0m17:52:06.167211 [error] [Thread-1 (]: 1 of 8 ERROR not_null_mart_daily_sentiment_published_date ...................... [[31mERROR[0m in 0.21s]
+[0m17:52:06.169212 [info ] [Thread-3 (]: 5 of 8 START test not_null_stg_news_published_ts_utc ........................... [RUN]
+[0m17:52:06.170214 [error] [Thread-2 (]: 2 of 8 ERROR not_null_mart_daily_sentiment_ticker .............................. [[31mERROR[0m in 0.21s]
+[0m17:52:06.172572 [debug] [Thread-4 (]: Began running node test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f
+[0m17:52:06.173573 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e' to be skipped because of status 'error'.  Reason: Runtime Error in test not_null_stg_news_overall_sentiment_score (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^.
+[0m17:52:06.174595 [debug] [Thread-1 (]: Finished running node test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c
+[0m17:52:06.175567 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.market_sentiment.not_null_stg_news_id.803a23d632, now test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58)
+[0m17:52:06.176591 [debug] [Thread-2 (]: Finished running node test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3
+[0m17:52:06.176591 [info ] [Thread-4 (]: 6 of 8 START test not_null_stg_ticker_sentiment_news_id ........................ [RUN]
+[0m17:52:06.178560 [debug] [Thread-1 (]: Began running node test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3
+[0m17:52:06.178560 [debug] [Thread-3 (]: Began compiling node test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58
+[0m17:52:06.180581 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c' to be skipped because of status 'error'.  Reason: Runtime Error in test not_null_mart_daily_sentiment_published_date (models\marts\schema.yml)
+  Catalog Error: Table with name mart_daily_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_gold"."mart_daily_sentiment"
+                ^.
+[0m17:52:06.180581 [debug] [Thread-2 (]: Began running node test.market_sentiment.unique_stg_news_id.f863109960
+[0m17:52:06.182552 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.market_sentiment.not_null_stg_news_overall_sentiment_score.dc6e99708e, now test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f)
+[0m17:52:06.188564 [debug] [Thread-3 (]: Writing injected SQL for node "test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58"
+[0m17:52:06.182552 [info ] [Thread-1 (]: 7 of 8 START test not_null_stg_ticker_sentiment_ticker ......................... [RUN]
+[0m17:52:06.190559 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3' to be skipped because of status 'error'.  Reason: Runtime Error in test not_null_mart_daily_sentiment_ticker (models\marts\schema.yml)
+  Catalog Error: Table with name mart_daily_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_gold"."mart_daily_sentiment"
+                ^.
+[0m17:52:06.191556 [debug] [Thread-4 (]: Began compiling node test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f
+[0m17:52:06.190559 [info ] [Thread-2 (]: 8 of 8 START test unique_stg_news_id ........................................... [RUN]
+[0m17:52:06.193521 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.market_sentiment.not_null_mart_daily_sentiment_published_date.03ab8f920c, now test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3)
+[0m17:52:06.201498 [debug] [Thread-4 (]: Writing injected SQL for node "test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f"
+[0m17:52:06.202536 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.market_sentiment.not_null_mart_daily_sentiment_ticker.4e690b6ce3, now test.market_sentiment.unique_stg_news_id.f863109960)
+[0m17:52:06.202536 [debug] [Thread-1 (]: Began compiling node test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3
+[0m17:52:06.203521 [debug] [Thread-3 (]: Began executing node test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58
+[0m17:52:06.204792 [debug] [Thread-2 (]: Began compiling node test.market_sentiment.unique_stg_news_id.f863109960
+[0m17:52:06.209808 [debug] [Thread-1 (]: Writing injected SQL for node "test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3"
+[0m17:52:06.215790 [debug] [Thread-3 (]: Writing runtime sql for node "test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58"
+[0m17:52:06.228751 [debug] [Thread-4 (]: Began executing node test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f
+[0m17:52:06.235734 [debug] [Thread-2 (]: Writing injected SQL for node "test.market_sentiment.unique_stg_news_id.f863109960"
+[0m17:52:06.246704 [debug] [Thread-4 (]: Writing runtime sql for node "test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f"
+[0m17:52:06.248698 [debug] [Thread-3 (]: Using duckdb connection "test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58"
+[0m17:52:06.251690 [debug] [Thread-2 (]: Began executing node test.market_sentiment.unique_stg_news_id.f863109960
+[0m17:52:06.252688 [debug] [Thread-1 (]: Began executing node test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3
+[0m17:52:06.254681 [debug] [Thread-4 (]: Using duckdb connection "test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f"
+[0m17:52:06.256676 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58: BEGIN
+[0m17:52:06.268645 [debug] [Thread-2 (]: Writing runtime sql for node "test.market_sentiment.unique_stg_news_id.f863109960"
+[0m17:52:06.276623 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f: BEGIN
+[0m17:52:06.280614 [debug] [Thread-1 (]: Writing runtime sql for node "test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3"
+[0m17:52:06.282608 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m17:52:06.284605 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m17:52:06.286600 [debug] [Thread-3 (]: SQL status: OK in 0.005 seconds
+[0m17:52:06.288594 [debug] [Thread-4 (]: SQL status: OK in 0.004 seconds
+[0m17:52:06.290587 [debug] [Thread-3 (]: Using duckdb connection "test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58"
+[0m17:52:06.291586 [debug] [Thread-2 (]: Using duckdb connection "test.market_sentiment.unique_stg_news_id.f863109960"
+[0m17:52:06.293579 [debug] [Thread-1 (]: Using duckdb connection "test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3"
+[0m17:52:06.295087 [debug] [Thread-4 (]: Using duckdb connection "test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f"
+[0m17:52:06.297089 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select published_ts_utc
+from "warehouse"."main_silver"."stg_news"
+where published_ts_utc is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.298087 [debug] [Thread-2 (]: On test.market_sentiment.unique_stg_news_id.f863109960: BEGIN
+[0m17:52:06.300084 [debug] [Thread-1 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3: BEGIN
+[0m17:52:06.302078 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select news_id
+from "warehouse"."main_silver"."stg_ticker_sentiment"
+where news_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.305069 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m17:52:06.308061 [debug] [Thread-3 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select published_ts_utc
+from "warehouse"."main_silver"."stg_news"
+where published_ts_utc is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.309060 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m17:52:06.311052 [debug] [Thread-3 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.313046 [debug] [Thread-4 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select news_id
+from "warehouse"."main_silver"."stg_ticker_sentiment"
+where news_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.314043 [debug] [Thread-2 (]: SQL status: OK in 0.010 seconds
+[0m17:52:06.316039 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58: ROLLBACK
+[0m17:52:06.317037 [debug] [Thread-4 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.319031 [debug] [Thread-1 (]: SQL status: OK in 0.009 seconds
+[0m17:52:06.320028 [debug] [Thread-2 (]: Using duckdb connection "test.market_sentiment.unique_stg_news_id.f863109960"
+[0m17:52:06.322030 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f: ROLLBACK
+[0m17:52:06.327022 [debug] [Thread-1 (]: Using duckdb connection "test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3"
+[0m17:52:06.328005 [debug] [Thread-2 (]: On test.market_sentiment.unique_stg_news_id.f863109960: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.unique_stg_news_id.f863109960"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    id as unique_field,
+    count(*) as n_records
+
+from "warehouse"."main_silver"."stg_news"
+where id is not null
+group by id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.330003 [debug] [Thread-1 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select ticker
+from "warehouse"."main_silver"."stg_ticker_sentiment"
+where ticker is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.335983 [debug] [Thread-2 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.unique_stg_news_id.f863109960"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    id as unique_field,
+    count(*) as n_records
+
+from "warehouse"."main_silver"."stg_news"
+where id is not null
+group by id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.336980 [debug] [Thread-2 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.338976 [debug] [Thread-1 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.13", "profile_name": "market_sentiment", "target_name": "dev", "node_id": "test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select ticker
+from "warehouse"."main_silver"."stg_ticker_sentiment"
+where ticker is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m17:52:06.339974 [debug] [Thread-2 (]: On test.market_sentiment.unique_stg_news_id.f863109960: ROLLBACK
+[0m17:52:06.340973 [debug] [Thread-1 (]: DuckDB adapter: Rolling back transaction.
+[0m17:52:06.345972 [debug] [Thread-1 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3: ROLLBACK
+[0m17:52:06.348948 [debug] [Thread-3 (]: Failed to rollback 'test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58'
+[0m17:52:06.352937 [debug] [Thread-3 (]: On test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58: Close
+[0m17:52:06.356928 [debug] [Thread-4 (]: Failed to rollback 'test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f'
+[0m17:52:06.360916 [debug] [Thread-4 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f: Close
+[0m17:52:06.368896 [debug] [Thread-1 (]: Failed to rollback 'test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3'
+[0m17:52:06.369892 [debug] [Thread-1 (]: On test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3: Close
+[0m17:52:06.372884 [debug] [Thread-2 (]: Failed to rollback 'test.market_sentiment.unique_stg_news_id.f863109960'
+[0m17:52:06.376873 [debug] [Thread-2 (]: On test.market_sentiment.unique_stg_news_id.f863109960: Close
+[0m17:52:06.379866 [debug] [Thread-3 (]: Runtime Error in test not_null_stg_news_published_ts_utc (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.382857 [debug] [Thread-4 (]: Runtime Error in test not_null_stg_ticker_sentiment_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_ticker_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_ticker_sentiment"
+                ^
+[0m17:52:06.385849 [error] [Thread-3 (]: 5 of 8 ERROR not_null_stg_news_published_ts_utc ................................ [[31mERROR[0m in 0.21s]
+[0m17:52:06.388843 [debug] [Thread-3 (]: Finished running node test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58
+[0m17:52:06.390838 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58' to be skipped because of status 'error'.  Reason: Runtime Error in test not_null_stg_news_published_ts_utc (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^.
+[0m17:52:06.386847 [error] [Thread-4 (]: 6 of 8 ERROR not_null_stg_ticker_sentiment_news_id ............................. [[31mERROR[0m in 0.20s]
+[0m17:52:06.392831 [debug] [Thread-4 (]: Finished running node test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f
+[0m17:52:06.394826 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f' to be skipped because of status 'error'.  Reason: Runtime Error in test not_null_stg_ticker_sentiment_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_ticker_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_ticker_sentiment"
+                ^.
+[0m17:52:06.398816 [debug] [Thread-1 (]: Runtime Error in test not_null_stg_ticker_sentiment_ticker (models\staging\schema.yml)
+  Catalog Error: Table with name stg_ticker_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_ticker_sentiment"
+                ^
+[0m17:52:06.402804 [debug] [Thread-2 (]: Runtime Error in test unique_stg_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 18: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.399815 [error] [Thread-1 (]: 7 of 8 ERROR not_null_stg_ticker_sentiment_ticker .............................. [[31mERROR[0m in 0.21s]
+[0m17:52:06.405797 [debug] [Thread-1 (]: Finished running node test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3
+[0m17:52:06.404809 [error] [Thread-2 (]: 8 of 8 ERROR unique_stg_news_id ................................................ [[31mERROR[0m in 0.20s]
+[0m17:52:06.407796 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3' to be skipped because of status 'error'.  Reason: Runtime Error in test not_null_stg_ticker_sentiment_ticker (models\staging\schema.yml)
+  Catalog Error: Table with name stg_ticker_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_ticker_sentiment"
+                ^.
+[0m17:52:06.409786 [debug] [Thread-2 (]: Finished running node test.market_sentiment.unique_stg_news_id.f863109960
+[0m17:52:06.411782 [debug] [Thread-7 (]: Marking all children of 'test.market_sentiment.unique_stg_news_id.f863109960' to be skipped because of status 'error'.  Reason: Runtime Error in test unique_stg_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 18: from "warehouse"."main_silver"."stg_news"
+                ^.
+[0m17:52:06.415771 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:52:06.416768 [debug] [MainThread]: On master: BEGIN
+[0m17:52:06.417765 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m17:52:06.420760 [debug] [MainThread]: SQL status: OK in 0.003 seconds
+[0m17:52:06.422751 [debug] [MainThread]: On master: COMMIT
+[0m17:52:06.423749 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:52:06.424745 [debug] [MainThread]: On master: COMMIT
+[0m17:52:06.425750 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:52:06.426752 [debug] [MainThread]: On master: Close
+[0m17:52:06.428739 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m17:52:06.429735 [debug] [MainThread]: Connection 'list_warehouse_main_silver' was properly closed.
+[0m17:52:06.431729 [debug] [MainThread]: Connection 'list_warehouse_main_gold' was properly closed.
+[0m17:52:06.432725 [debug] [MainThread]: Connection 'test.market_sentiment.not_null_stg_ticker_sentiment_ticker.0eff8a63d3' was properly closed.
+[0m17:52:06.433724 [debug] [MainThread]: Connection 'test.market_sentiment.unique_stg_news_id.f863109960' was properly closed.
+[0m17:52:06.434718 [debug] [MainThread]: Connection 'test.market_sentiment.not_null_stg_news_published_ts_utc.d420f72e58' was properly closed.
+[0m17:52:06.434718 [debug] [MainThread]: Connection 'test.market_sentiment.not_null_stg_ticker_sentiment_news_id.41dd34568f' was properly closed.
+[0m17:52:06.435716 [info ] [MainThread]: 
+[0m17:52:06.437714 [info ] [MainThread]: Finished running 8 data tests in 0 hours 0 minutes and 0.89 seconds (0.89s).
+[0m17:52:06.442698 [debug] [MainThread]: Command end result
+[0m17:52:06.494559 [debug] [MainThread]: Wrote artifact WritableManifest to dbt\target\manifest.json
+[0m17:52:06.500544 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt\target\semantic_manifest.json
+[0m17:52:06.514508 [debug] [MainThread]: Wrote artifact RunExecutionResult to dbt\target\run_results.json
+[0m17:52:06.515504 [info ] [MainThread]: 
+[0m17:52:06.517504 [info ] [MainThread]: [31mCompleted with 8 errors, 0 partial successes, and 0 warnings:[0m
+[0m17:52:06.518495 [info ] [MainThread]: 
+[0m17:52:06.520493 [error] [MainThread]: [31mFailure in test not_null_stg_news_id (models\staging\schema.yml)[0m
+[0m17:52:06.523481 [error] [MainThread]:   Runtime Error in test not_null_stg_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.524494 [info ] [MainThread]: 
+[0m17:52:06.525476 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\schema.yml\not_null_stg_news_id.sql
+[0m17:52:06.527473 [info ] [MainThread]: 
+[0m17:52:06.529466 [error] [MainThread]: [31mFailure in test not_null_stg_news_overall_sentiment_score (models\staging\schema.yml)[0m
+[0m17:52:06.531466 [error] [MainThread]:   Runtime Error in test not_null_stg_news_overall_sentiment_score (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.533457 [info ] [MainThread]: 
+[0m17:52:06.534459 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\schema.yml\not_null_stg_news_overall_sentiment_score.sql
+[0m17:52:06.537444 [info ] [MainThread]: 
+[0m17:52:06.538445 [error] [MainThread]: [31mFailure in test not_null_mart_daily_sentiment_published_date (models\marts\schema.yml)[0m
+[0m17:52:06.539457 [error] [MainThread]:   Runtime Error in test not_null_mart_daily_sentiment_published_date (models\marts\schema.yml)
+  Catalog Error: Table with name mart_daily_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_gold"."mart_daily_sentiment"
+                ^
+[0m17:52:06.541433 [info ] [MainThread]: 
+[0m17:52:06.542431 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\marts\schema.yml\not_null_mart_daily_sentiment_published_date.sql
+[0m17:52:06.543429 [info ] [MainThread]: 
+[0m17:52:06.544435 [error] [MainThread]: [31mFailure in test not_null_mart_daily_sentiment_ticker (models\marts\schema.yml)[0m
+[0m17:52:06.546421 [error] [MainThread]:   Runtime Error in test not_null_mart_daily_sentiment_ticker (models\marts\schema.yml)
+  Catalog Error: Table with name mart_daily_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_gold"."mart_daily_sentiment"
+                ^
+[0m17:52:06.550434 [info ] [MainThread]: 
+[0m17:52:06.552418 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\marts\schema.yml\not_null_mart_daily_sentiment_ticker.sql
+[0m17:52:06.554401 [info ] [MainThread]: 
+[0m17:52:06.555397 [error] [MainThread]: [31mFailure in test not_null_stg_news_published_ts_utc (models\staging\schema.yml)[0m
+[0m17:52:06.557393 [error] [MainThread]:   Runtime Error in test not_null_stg_news_published_ts_utc (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.559387 [info ] [MainThread]: 
+[0m17:52:06.560383 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\schema.yml\not_null_stg_news_published_ts_utc.sql
+[0m17:52:06.562380 [info ] [MainThread]: 
+[0m17:52:06.566398 [error] [MainThread]: [31mFailure in test not_null_stg_ticker_sentiment_news_id (models\staging\schema.yml)[0m
+[0m17:52:06.567384 [error] [MainThread]:   Runtime Error in test not_null_stg_ticker_sentiment_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_ticker_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_ticker_sentiment"
+                ^
+[0m17:52:06.569361 [info ] [MainThread]: 
+[0m17:52:06.570359 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\schema.yml\not_null_stg_ticker_sentiment_news_id.sql
+[0m17:52:06.571358 [info ] [MainThread]: 
+[0m17:52:06.572353 [error] [MainThread]: [31mFailure in test not_null_stg_ticker_sentiment_ticker (models\staging\schema.yml)[0m
+[0m17:52:06.573349 [error] [MainThread]:   Runtime Error in test not_null_stg_ticker_sentiment_ticker (models\staging\schema.yml)
+  Catalog Error: Table with name stg_ticker_sentiment does not exist!
+  Did you mean "pg_catalog.pg_prepared_statements"?
+  
+  LINE 17: from "warehouse"."main_silver"."stg_ticker_sentiment"
+                ^
+[0m17:52:06.574344 [info ] [MainThread]: 
+[0m17:52:06.574344 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\schema.yml\not_null_stg_ticker_sentiment_ticker.sql
+[0m17:52:06.575344 [info ] [MainThread]: 
+[0m17:52:06.576340 [error] [MainThread]: [31mFailure in test unique_stg_news_id (models\staging\schema.yml)[0m
+[0m17:52:06.577339 [error] [MainThread]:   Runtime Error in test unique_stg_news_id (models\staging\schema.yml)
+  Catalog Error: Table with name stg_news does not exist!
+  Did you mean "pg_catalog.pg_views"?
+  
+  LINE 18: from "warehouse"."main_silver"."stg_news"
+                ^
+[0m17:52:06.577339 [info ] [MainThread]: 
+[0m17:52:06.582325 [info ] [MainThread]:   compiled code at target\compiled\market_sentiment\models\staging\schema.yml\unique_stg_news_id.sql
+[0m17:52:06.582325 [info ] [MainThread]: 
+[0m17:52:06.583324 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=8 SKIP=0 NO-OP=0 TOTAL=8
+[0m17:52:06.585317 [debug] [MainThread]: Command `dbt test` failed at 17:52:06.584319 after 216.24 seconds
+[0m17:52:06.585317 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D05F6F00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D0A8F710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000201D0A175F0>]}
+[0m17:52:06.586314 [debug] [MainThread]: Flushing usage events
+[0m17:52:07.281586 [debug] [MainThread]: An error was encountered while trying to flush usage events
