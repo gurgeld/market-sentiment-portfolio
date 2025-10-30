@@ -1,0 +1,16 @@
+name: "market_sentiment"
+version: "1.0"
+profile: "market_sentiment"
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  market_sentiment:
+    staging:
+      +schema: silver
+      +materialized: view
+    marts:
+      +schema: gold
+      +materialized: table

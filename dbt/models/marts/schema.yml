@@ -1,0 +1,10 @@
+version: 2
+models:
+  - name: mart_daily_sentiment
+    columns:
+      - name: ticker
+        tests: [not_null]
+      - name: published_date
+        tests: [not_null]
+  - name: mart_ticker_heatmap
+

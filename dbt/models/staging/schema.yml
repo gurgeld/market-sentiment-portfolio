@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: stg_news
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: published_ts_utc
+        tests: [not_null]
+      - name: overall_sentiment_score
+        tests: [not_null]
+  - name: stg_ticker_sentiment
+    columns:
+      - name: news_id
+        tests: [not_null]
+      - name: ticker
+        tests: [not_null]

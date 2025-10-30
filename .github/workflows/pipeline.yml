@@ -1,0 +1,39 @@
+name: daily-pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "25 9 * * *"   # 06:25 BRT ~ 09:25 UTC (ajuste se quiser)
+    - cron: "55 18 * * *"  # duas execuções/dia (exemplo)
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: |
+          pip install -U pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install -e .; fi
+      - name: Set API key
+        env:
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+        run: echo "API key set"
+      - name: Extract news
+        env:
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+        run: make extract_news
+      - name: Transform (dbt)
+        run: make transform
+      - name: Docs (dbt)
+        run: make docs
+      - name: Commit artifacts (opcional)
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "chore: pipeline artifacts" || echo "no changes"
+          git push
