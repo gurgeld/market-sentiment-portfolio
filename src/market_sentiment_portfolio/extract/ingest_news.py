@@ -19,7 +19,15 @@ DAYS_BACK = int(os.getenv("NEWS_DAYS_BACK", "7"))
 def iso8601(ts: datetime) -> str:
     """Normaliza timestamps para o formato aceito pela API."""
 
-    return ts.replace(microsecond=0).isoformat()
+    # A API do Alpha Vantage exige o formato compacto `YYYYMMDDTHHMMSS`, sem
+    # separadores ou deslocamentos como ``+00:00``. ``datetime.isoformat`` gera
+    # strings como ``2024-05-01T10:30:00+00:00`` que são recusadas pelo
+    # endpoint, portanto formatamos manualmente e garantimos normalização para
+    # UTC.
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=timezone.utc)
+    ts = ts.astimezone(timezone.utc).replace(microsecond=0)
+    return ts.strftime("%Y%m%dT%H%M%S")
 
 def main() -> None:
     ensure_schemas()
