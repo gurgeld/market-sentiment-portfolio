@@ -5,7 +5,7 @@ setup:
 	pip install -r requirements.txt || pip install -e .
 
 extract_news:
-	$(PY) src/extract/ingest_news.py
+	$(PY) -m market_sentiment_portfolio.extract.ingest_news
 
 transform:
 	dbt deps --project-dir dbt
@@ -19,3 +19,4 @@ app:
 	streamlit run app/streamlit_app.py
 
 all: extract_news transform docs
+

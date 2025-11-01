@@ -1,13 +1,18 @@
+"""Helpers para lidar com limites de requisição."""
+
+from __future__ import annotations
+
 import time
+from collections.abc import Callable
 from functools import wraps
 
-def throttle(min_interval_sec: float = 12.5):
-    """
-    Alpha Vantage free tier ~5 req/min → intervalo ~12s.
-    Ajuste se usar mais endpoints.
-    """
-    def deco(fn):
+
+def throttle(min_interval_sec: float = 12.5) -> Callable[[Callable[..., object]], Callable[..., object]]:
+    """Garante um espaçamento mínimo entre chamadas sequenciais."""
+
+    def deco(fn: Callable[..., object]) -> Callable[..., object]:
         last = {"t": 0.0}
+
         @wraps(fn)
         def wrapper(*args, **kwargs):
             now = time.time()
@@ -17,5 +22,7 @@ def throttle(min_interval_sec: float = 12.5):
             result = fn(*args, **kwargs)
             last["t"] = time.time()
             return result
+
         return wrapper
+
     return deco

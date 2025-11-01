@@ -15,4 +15,11 @@ dependencies = [
   "altair>=5.1",
 ]
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.dbt]
+
