@@ -1,8 +1,14 @@
+"""Pipeline para ingerir notícias do Alpha Vantage."""
+
+from __future__ import annotations
+
 import os
 from datetime import datetime, timedelta, timezone
+
 import pandas as pd
-from src.extract.client import AlphaVantageClient
-from src.utils.io import get_con, ensure_schemas
+
+from market_sentiment_portfolio.extract.client import AlphaVantageClient
+from market_sentiment_portfolio.utils.io import ensure_schemas, get_con
 
 # Config – ajuste tickers e tópicos do seu MVP
 TICKERS = ["AAPL", "MSFT", "GOOGL", "AMZN", "XOM", "PG"]
@@ -11,9 +17,11 @@ TOPICS  = ["technology"]  # veja doc oficial p/ lista
 DAYS_BACK = int(os.getenv("NEWS_DAYS_BACK", "7"))
 
 def iso8601(ts: datetime) -> str:
+    """Normaliza timestamps para o formato aceito pela API."""
+
     return ts.replace(microsecond=0).isoformat()
 
-def main():
+def main() -> None:
     ensure_schemas()
     client = AlphaVantageClient()
 
@@ -73,59 +81,65 @@ def main():
     ts_df = pd.DataFrame(ts_rows)
 
     con = get_con()
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS bronze_news AS
-        SELECT * FROM (SELECT 1 AS dummy) WHERE 1=0;
-    """)
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS bronze_ticker_sentiment AS
-        SELECT * FROM (SELECT 1 AS dummy) WHERE 1=0;
-    """)
+    try:
+        # UPSERT simples por chave
+        con.execute(
+            """
+            CREATE TABLE IF NOT EXISTS bronze.bronze_news (
+                id TEXT PRIMARY KEY,
+                title TEXT,
+                summary TEXT,
+                source TEXT,
+                url TEXT,
+                time_published TEXT,
+                overall_sentiment_score DOUBLE,
+                overall_sentiment_label TEXT,
+                topics TEXT,
+                raw_json JSON,
+                ingested_at TIMESTAMP
+            );
+            """
+        )
+        con.execute(
+            """
+            CREATE TABLE IF NOT EXISTS bronze.bronze_ticker_sentiment (
+                news_id TEXT,
+                ticker TEXT,
+                relevance_score DOUBLE,
+                ticker_sentiment_score DOUBLE,
+                ticker_sentiment_label TEXT
+            );
+            """
+        )
 
-    # UPSERT simples por chave
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS bronze.bronze_news (
-            id TEXT PRIMARY KEY,
-            title TEXT,
-            summary TEXT,
-            source TEXT,
-            url TEXT,
-            time_published TEXT,
-            overall_sentiment_score DOUBLE,
-            overall_sentiment_label TEXT,
-            topics TEXT,
-            raw_json JSON,
-            ingested_at TIMESTAMP
-        );
-    """)
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS bronze.bronze_ticker_sentiment (
-            news_id TEXT,
-            ticker TEXT,
-            relevance_score DOUBLE,
-            ticker_sentiment_score DOUBLE,
-            ticker_sentiment_label TEXT
-        );
-    """)
+        # upsert news
+        con.register("news_df", news_df)
+        con.execute(
+            """
+            DELETE FROM bronze.bronze_news
+            WHERE id IN (SELECT id FROM news_df);
+            """
+        )
+        con.execute(
+            """
+            INSERT INTO bronze.bronze_news
+            SELECT * FROM news_df;
+            """
+        )
 
-    # upsert news
-    con.execute("""
-        CREATE TEMP TABLE tmp_news AS SELECT * FROM news_df;
-    """)
-    con.register("news_df", news_df)
-    con.execute("""
-        INSERT OR REPLACE INTO bronze.bronze_news
-        SELECT * FROM news_df;
-    """)
-
-    # replace ticker_sentiment do período (simples)
-    con.execute("DELETE FROM bronze.bronze_ticker_sentiment WHERE news_id IN (SELECT id FROM bronze.bronze_news);")
-    con.register("ts_df", ts_df)
-    con.execute("""
-        INSERT INTO bronze.bronze_ticker_sentiment
-        SELECT * FROM ts_df;
-    """)
-    con.close()
+        # replace ticker_sentiment do período (simples)
+        con.execute(
+            "DELETE FROM bronze.bronze_ticker_sentiment WHERE news_id IN (SELECT id FROM bronze.bronze_news);"
+        )
+        con.register("ts_df", ts_df)
+        con.execute(
+            """
+            INSERT INTO bronze.bronze_ticker_sentiment
+            SELECT * FROM ts_df;
+            """
+        )
+    finally:
+        con.close()
     print(f"Inseridos {len(news_df)} artigos e {len(ts_df)} linhas de ticker_sentiment.")
 
 if __name__ == "__main__":
